@@ -8,8 +8,16 @@ namespace UltrahapticsCoreAsset.Examples.Polyline
     {
         public string endpointUrl = ""; // Cambia esto a la URL correcta
         private SensationSource sensationSource;
+        public LineRenderer lineRenderer;
 
-        public GameObject linePrefab;
+        public RectTransform Point0;
+        public RectTransform Point1;
+        public RectTransform Point2;
+        public RectTransform Point3;
+        public RectTransform Point4;
+        public RectTransform Point5;
+
+        private float scaling = 3000.0f;
 
         private GameObject activeFigure; // Para mantener una referencia a la figura activa
 
@@ -64,20 +72,28 @@ namespace UltrahapticsCoreAsset.Examples.Polyline
         {
             try
             {
-                // Parsear la respuesta JSON para obtener el estado, tratando como un array
                 var jsonDataArray = JsonUtility.FromJson<Wrapper<ResponseData>>(WrapArray(responseText));
 
                 if (jsonDataArray.items.Length > 0)
                 {
-                    // Si el estado es 1, activamos la figura (línea en este caso)
-                    if (jsonDataArray.items[0].state == 1)
+                    // Según el estado, activamos la figura correspondiente
+                    switch (jsonDataArray.items[0].state)
                     {
-                        ActivateFigure("line");
-                    }
-                    // Si el estado es 0, detenemos cualquier figura activa
-                    else if (jsonDataArray.items[0].state == 0)
-                    {
-                        DeactivateFigure();
+                        case 1:
+                            ActivateFigure("line");
+                            break;
+                        case 2:
+                            ActivateFigure("polygon");
+                            break;
+                        case 3:
+                            ActivateFigure("triangle");
+                            break;
+                        case 4:
+                            ActivateFigure("square");
+                            break;
+                        default:
+                            DeactivateFigure();
+                            break;
                     }
                 }
             }
@@ -89,37 +105,118 @@ namespace UltrahapticsCoreAsset.Examples.Polyline
 
         void ActivateFigure(string figureType)
         {
-            // Desactivamos la figura actual antes de activar una nueva
-            DeactivateFigure();
+            DeactivateFigure(); // Desactiva cualquier figura activa
 
             if (figureType == "line")
             {
-                activeFigure = Instantiate(linePrefab, Vector3.zero, Quaternion.identity);
+                SetLine();
+            }
+            else if (figureType == "polygon")
+            {
+                SetPentagon();
+            }
+            else if (figureType == "triangle")
+            {
+                SetTriangle();
+            }
+            else if (figureType == "square")
+            {
+                SetSquare();
+            }
 
-                // Activar el SensationSource para que la figura se reproduzca
-                if (sensationSource != null)
-                {
-                    sensationSource.SensationBlock = "Polyline6"; // Asegúrate de que este bloque existe
-                    sensationSource.Running = true;
-                }
+            if (sensationSource != null)
+            {
+                sensationSource.SensationBlock = "Polyline6"; // Asegúrate de que este bloque existe
+                sensationSource.Running = true;
             }
         }
 
         void DeactivateFigure()
         {
-            // Si hay una figura activa, la destruimos
-            if (activeFigure != null)
+            if (sensationSource != null)
             {
-                Destroy(activeFigure);
-                activeFigure = null;
+                sensationSource.Running = false;
+            }
 
-                // Desactivar el SensationSource para detener la reproducción
-                if (sensationSource != null)
-                {
-                    sensationSource.Running = false;
-                }
+            Debug.Log("Figura desactivada");
+        }
 
-                Debug.Log("Figura desactivada");
+        void SetLine()
+        {
+            Point0.localPosition = new Vector3(-0.04f, 0.0f, 0.0f);
+            Point1.localPosition = new Vector3(0.04f, 0.0f, 0.0f);
+            Point2.localPosition = new Vector3(0.04f, 0.0f, 0.0f);
+            Point3.localPosition = new Vector3(0.04f, 0.0f, 0.0f);
+            Point4.localPosition = new Vector3(0.04f, 0.0f, 0.0f);
+            Point5.localPosition = new Vector3(0.04f, 0.0f, 0.0f);
+            Debug.Log("Figura: linea");
+            ScalePoints();
+            UpdateSensationInputs();
+        }
+
+        void SetTriangle()
+        {
+            Point0.localPosition = new Vector3(0.0f, 0.045f, 0.0f);
+            Point1.localPosition = new Vector3(0.025f, -0.04f, 0.0f);
+            Point2.localPosition = new Vector3(-0.025f, -0.04f, 0.0f);
+            Point3.localPosition = new Vector3(0.0f, 0.045f, 0.0f);
+            Point4.localPosition = new Vector3(0.0f, 0.045f, 0.0f);
+            Point5.localPosition = new Vector3(0.0f, 0.045f, 0.0f);
+            Debug.Log("Figura: triangulo");
+
+            ScalePoints();
+            UpdateSensationInputs();
+        }
+
+        void SetSquare()
+        {
+            Point0.localPosition = new Vector3(-0.025f, 0.025f, 0.0f);
+            Point1.localPosition = new Vector3(0.025f, 0.025f, 0.0f);
+            Point2.localPosition = new Vector3(0.025f, -0.025f, 0.0f);
+            Point3.localPosition = new Vector3(-0.025f, -0.025f, 0.0f);
+            Point4.localPosition = new Vector3(-0.025f, 0.025f, 0.0f);
+            Point5.localPosition = new Vector3(-0.025f, 0.025f, 0.0f);
+            Debug.Log("Figura: Cuadrado");
+
+            ScalePoints();
+            UpdateSensationInputs();
+        }
+
+        void SetPentagon()
+        {
+            Point0.localPosition = new Vector3(0.0f, 0.025f, 0.0f);
+            Point1.localPosition = new Vector3(0.024f, 0.008f, 0.0f);
+            Point2.localPosition = new Vector3(0.015f, -0.02f, 0.0f);
+            Point3.localPosition = new Vector3(-0.015f, -0.02f, 0.0f);
+            Point4.localPosition = new Vector3(-0.024f, 0.008f, 0.0f);
+            Point5.localPosition = new Vector3(0.0f, 0.025f, 0.0f);
+            Debug.Log("Figura: pentagono");
+
+            ScalePoints();
+            UpdateSensationInputs();
+        }
+
+        void ScalePoints()
+        {
+            Point0.localPosition *= scaling;
+            Point1.localPosition *= scaling;
+            Point2.localPosition *= scaling;
+            Point3.localPosition *= scaling;
+            Point4.localPosition *= scaling;
+            Point5.localPosition *= scaling;
+        }
+
+        void UpdateSensationInputs()
+        {
+            // Asignamos directamente los valores si SensationSource está disponible
+            if (sensationSource != null)
+            {
+                sensationSource.Inputs["point0"].Value = Point0.localPosition / scaling;
+                sensationSource.Inputs["point1"].Value = Point1.localPosition / scaling;
+                sensationSource.Inputs["point2"].Value = Point2.localPosition / scaling;
+                sensationSource.Inputs["point3"].Value = Point3.localPosition / scaling;
+                sensationSource.Inputs["point4"].Value = Point4.localPosition / scaling;
+                sensationSource.Inputs["point5"].Value = Point5.localPosition / scaling;
             }
         }
 
