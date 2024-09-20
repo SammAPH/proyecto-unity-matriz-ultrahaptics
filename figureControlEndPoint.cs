@@ -77,7 +77,7 @@ namespace UltrahapticsCoreAsset.Examples.Polyline
                 if (jsonDataArray.items.Length > 0)
                 {
                     // Según el estado, activamos la figura correspondiente
-                    switch (jsonDataArray.items[0].figures)
+                    switch (jsonDataArray.items[0].figure)
                     {
                         case 1:
                             ActivateFigure("line");
@@ -225,7 +225,7 @@ namespace UltrahapticsCoreAsset.Examples.Polyline
         {
             public int id;
             public string temperature;
-            public int figures;
+            public int figure;
         }
 
         [System.Serializable]
