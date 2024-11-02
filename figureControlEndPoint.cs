@@ -143,12 +143,12 @@ namespace UltrahapticsCoreAsset.Examples.Polyline
 
         void SetLine()
         {
-            Point0.localPosition = new Vector3(-0.04f, 0.0f, 0.0f);
-            Point1.localPosition = new Vector3(0.04f, 0.0f, 0.0f);
-            Point2.localPosition = new Vector3(0.04f, 0.0f, 0.0f);
-            Point3.localPosition = new Vector3(0.04f, 0.0f, 0.0f);
-            Point4.localPosition = new Vector3(0.04f, 0.0f, 0.0f);
-            Point5.localPosition = new Vector3(0.04f, 0.0f, 0.0f);
+            Point0.localPosition = new Vector3(-0.05f, 0.0f, 0.1f);
+            Point1.localPosition = new Vector3(0.05f, 0.0f, 0.1f);
+            Point2.localPosition = new Vector3(0.05f, 0.0f, 0.1f);
+            Point3.localPosition = new Vector3(0.05f, 0.0f, 0.1f);
+            Point4.localPosition = new Vector3(0.05f, 0.0f, 0.1f);
+            Point5.localPosition = new Vector3(0.05f, 0.0f, 0.1f);
             Debug.Log("Figura: linea");
             ScalePoints();
             UpdateSensationInputs();
@@ -156,12 +156,12 @@ namespace UltrahapticsCoreAsset.Examples.Polyline
 
         void SetTriangle()
         {
-            Point0.localPosition = new Vector3(0.0f, 0.045f, 0.0f);
-            Point1.localPosition = new Vector3(0.025f, -0.04f, 0.0f);
-            Point2.localPosition = new Vector3(-0.025f, -0.04f, 0.0f);
-            Point3.localPosition = new Vector3(0.0f, 0.045f, 0.0f);
-            Point4.localPosition = new Vector3(0.0f, 0.045f, 0.0f);
-            Point5.localPosition = new Vector3(0.0f, 0.045f, 0.0f);
+            Point0.localPosition = new Vector3(0.0f, 0.045f, 0.1f);
+            Point1.localPosition = new Vector3(0.04f, -0.05f, 0.1f);
+            Point2.localPosition = new Vector3(-0.04f, -0.05f, 0.1f);
+            Point3.localPosition = new Vector3(0.0f, 0.045f, 0.1f);
+            Point4.localPosition = new Vector3(0.0f, 0.045f, 0.1f);
+            Point5.localPosition = new Vector3(0.0f, 0.045f, 0.1f);
             Debug.Log("Figura: triangulo");
 
             ScalePoints();
@@ -170,12 +170,12 @@ namespace UltrahapticsCoreAsset.Examples.Polyline
 
         void SetSquare()
         {
-            Point0.localPosition = new Vector3(-0.025f, 0.025f, 0.0f);
-            Point1.localPosition = new Vector3(0.025f, 0.025f, 0.0f);
-            Point2.localPosition = new Vector3(0.025f, -0.025f, 0.0f);
-            Point3.localPosition = new Vector3(-0.025f, -0.025f, 0.0f);
-            Point4.localPosition = new Vector3(-0.025f, 0.025f, 0.0f);
-            Point5.localPosition = new Vector3(-0.025f, 0.025f, 0.0f);
+            Point0.localPosition = new Vector3(-0.04f, 0.04f, 0.1f);
+            Point1.localPosition = new Vector3(0.04f, 0.04f, 0.1f);
+            Point2.localPosition = new Vector3(0.04f, -0.04f, 0.1f);
+            Point3.localPosition = new Vector3(-0.04f, -0.04f, 0.1f);
+            Point4.localPosition = new Vector3(-0.04f, 0.04f, 0.1f);
+            Point5.localPosition = new Vector3(-0.04f, 0.04f, 0.1f);
             Debug.Log("Figura: Cuadrado");
 
             ScalePoints();
@@ -184,12 +184,12 @@ namespace UltrahapticsCoreAsset.Examples.Polyline
 
         void SetPentagon()
         {
-            Point0.localPosition = new Vector3(0.0f, 0.025f, 0.0f);
-            Point1.localPosition = new Vector3(0.024f, 0.008f, 0.0f);
-            Point2.localPosition = new Vector3(0.015f, -0.02f, 0.0f);
-            Point3.localPosition = new Vector3(-0.015f, -0.02f, 0.0f);
-            Point4.localPosition = new Vector3(-0.024f, 0.008f, 0.0f);
-            Point5.localPosition = new Vector3(0.0f, 0.025f, 0.0f);
+            Point0.localPosition = new Vector3(0.0f, 0.025f, 0.1f);
+            Point1.localPosition = new Vector3(0.024f, 0.008f, 0.1f);
+            Point2.localPosition = new Vector3(0.015f, -0.02f, 0.1f);
+            Point3.localPosition = new Vector3(-0.015f, -0.02f, 0.1f);
+            Point4.localPosition = new Vector3(-0.024f, 0.008f, 0.1f);
+            Point5.localPosition = new Vector3(0.0f, 0.025f, 0.1f);
             Debug.Log("Figura: pentagono");
 
             ScalePoints();
